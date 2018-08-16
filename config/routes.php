@@ -7,8 +7,4 @@ $router->add('GET', '/', function(){
     return 'Estamos na homepage';
 });
 
-$router->add('GET', '/users/(\d+)', function($params) use ($container){
-    $user = new Users($container);
-    $data = $user->get($params[1]);
-    return 'meu nome é ' . $data['name'];
-});
+$router->add('GET', '/users/(\d+)', '\App\Controllers\UsersController::show');
