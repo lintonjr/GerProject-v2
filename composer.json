@@ -1,0 +1,25 @@
+{
+    "name": "lintonjr/gerproject",
+    "description": "Gerenciador de projetos simples e estruturado com PHPOO e MVC",
+    "authors": [
+        {
+            "name": "lintonjr",
+            "email": "lintonjr@hotmail.com"
+        }
+    ],
+    "require": {
+        "pimple/pimple": "^3.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "GERP\\Framework\\": "src",
+            "App\\": "app"
+        }
+    },
+    "scripts": {
+        "server": "php -S localhost:8000 -t public"
+    },
+    "config": {
+        "process-timeout": 0
+    }
+}
