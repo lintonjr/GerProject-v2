@@ -4,6 +4,9 @@ use Pimple\Container;
 
 $container = new Container();
 
+$container['events'] = function (){
+    return new Zend\EventManager\EventManager;
+};
 $container['db'] = function (){
     $dsn = 'mysql:host=localhost;dbname=ger_project';
     $username = 'root';
