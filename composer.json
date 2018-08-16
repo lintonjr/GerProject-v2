@@ -14,8 +14,7 @@
     },
     "autoload": {
         "psr-4": {
-            "GERP\\Framework\\": "src",
-            "App\\": "app"
+            "GERP\\Framework\\": "src"
         }
     },
     "scripts": {

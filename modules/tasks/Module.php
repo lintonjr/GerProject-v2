@@ -1,12 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: linto
- * Date: 15/08/2018
- * Time: 22:54
- */
 
-namespace App;
+namespace GERP\Framework\Tasks;
 
 use GERP\Framework\Modules\Contract;
 
@@ -16,7 +10,7 @@ class Module implements Contract
     public function getNamespaces() :array
     {
         return [
-            'App\\' => __DIR__ . '/src'
+            'GERP\\Framework\\Tasks\\' => __DIR__ . '/src'
         ];
     }
     public function getContainerConfig() :string
