@@ -20,7 +20,8 @@ class UsersController
 
    public function update($container, $request)
     {
-        return '';
+        $user = new Users($container);
+        return $user->update($request->attributes->get(1), $request->request->all());
     }
 
    public function show($container, $request)
