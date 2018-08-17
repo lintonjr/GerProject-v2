@@ -7,21 +7,28 @@
  */
 
 namespace App\Models;
+use GERP\Framework\QueryBuilder;
 use Pimple\Container;
 
 class Users
 {
     private $db;
+    private $events;
+    private $queryBuilder;
 
     public function __construct(Container $container)
     {
         $this->db = $container['db'];
         $this->events = $container['events'];
+        $this->queryBuilder = new QueryBuilder;
     }
-    public function get($id)
+    public function get(array $conditions)
     {
-        $stmt = $this->db->prepare('SELECT * FROM `users` WHERE id=?');
-        $stmt->execute([$id]);
+        $query = $this->queryBuilder->select('users')
+            ->where($conditions)
+            ->getData();
+        $stmt = $this->db->prepare($query->sql);
+        $stmt->execute($query->bind);
 
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
@@ -38,45 +45,49 @@ class Users
     {
         $this->events->trigger('creating.users', null, $data);
 
-        $sql = 'INSERT INTO `users` (`name`) VALUES (?)';
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute(array_values($data));
+        $query = $this->queryBuilder->insert('users', $data)
+                ->getData();
 
-        $result = $this->get($this->db->lastInsertId());
+        $stmt = $this->db->prepare($query->sql);
+        $stmt->execute($query->bind);
+
+        $result = $this->get(['id' => $this->db->lastInsertId()]);
 
         $this->events->trigger('created.users', null, $result);
 
         return $result;
     }
 
-    public function update($id, array $data)
+    public function update(array $conditions, array $data)
     {
         $this->events->trigger('updating.users', null, $data);
 
-        $sql = 'UPDATE `users` SET name=? WHERE id=?';
+        $query = $this->queryBuilder->update('users', $data)
+            ->where($conditions)
+            ->getData();
 
-        $data = array_merge($data, [$id]);
+        $stmt = $this->db->prepare($query->sql);
+        $stmt->execute(array_values($query->bind));
 
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute(array_values($data));
-
-        $result = $this->get($id);
+        $result = $this->get($conditions);
 
         $this->events->trigger('updated.users', null, $result);
 
         return $result;
     }
 
-    public function delete($id)
+    public function delete(array $conditions)
     {
-        $result = $this->get($id);
+        $result = $this->get($conditions);
 
         $this->events->trigger('deleting.users', null, $result);
 
-        $sql = 'DELETE FROM `users` WHERE id=?';
+        $query = $this->queryBuilder->delete('users')
+            ->where($conditions)
+            ->getData();
 
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute([$id]);
+        $stmt = $this->db->prepare($query->sql);
+        $stmt->execute($query->bind);
 
         $this->events->trigger('deleted.users', null, $result);
 
