@@ -3,8 +3,8 @@
 use App\Models\Model;
 
 $router->add('GET', '/', function(){
-    debug('Estamos na homepage');
-    return 'Estamos na homepage';
+//    debug('Estamos na homepage');
+    return file_get_contents(__DIR__.'/../../template/index.html');
 });
 
 $router->add('GET', '/users', '\App\Controllers\UsersController::index');
