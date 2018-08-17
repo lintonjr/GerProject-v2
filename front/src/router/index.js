@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import Home from '@/components/Home'
+import Projects from '@/components/projects'
+import ProjectList from '@/components/projects/List'
+import ProjectShow from '@/components/projects/Show'
 
 Vue.use(Router)
 
@@ -8,8 +11,21 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    }
+      redirect: '/projects'
+    },
+    {
+      path: '/projects',
+      component: Projects,
+      children: [
+          {
+            path: '',
+            component: ProjectList
+          },
+          {
+              path: ':id',
+              component: ProjectShow
+          }
+      ]
+    },
   ]
 })
