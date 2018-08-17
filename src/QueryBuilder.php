@@ -58,6 +58,9 @@ class QueryBuilder
 
     public function where(array $conditions)
     {
+        if ($conditions == []){
+            return $this;
+        }
         if (!$this->sql){
             throw new \Exception("Select(), update() or delete required before where() method");
         }
