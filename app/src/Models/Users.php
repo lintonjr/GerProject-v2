@@ -26,10 +26,26 @@ class Users
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
+    public function all()
+    {
+        $stmt = $this->db->prepare('SELECT * FROM `users`');
+        $stmt->execute();
+
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
     public function create(array $data)
     {
         $this->events->trigger('creating.users', null, $data);
-        //inserir no banco
-        $this->events->trigger('created.users', null, $data);
+
+        $sql = 'INSERT INTO `users` (`name`) VALUES (?)';
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(array_values($data));
+
+        $result = $this->get($this->db->lastInsertId());
+
+        $this->events->trigger('created.users', null, $result);
+
+        return $result;
     }
 }

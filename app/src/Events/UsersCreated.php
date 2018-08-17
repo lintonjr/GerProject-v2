@@ -16,6 +16,6 @@ class UsersCreated
         // TODO: Implement __invoke() method.
         $event = $e->getName();
         $params = $e->getParams();
-//        echo sprintf('Disparado event "%s", com parametros: "%s"', $params, json_encode($params));
+        echo sprintf('Disparado event "%s", com parametros: "%s"', $params, json_encode($params));
     }
 }
