@@ -3,7 +3,7 @@
 use App\Models\Model;
 
 $router->add('GET', '/', function(){
-
+    debug('Estamos na homepage');
     return 'Estamos na homepage';
 });
 

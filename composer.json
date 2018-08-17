@@ -15,7 +15,10 @@
     "autoload": {
         "psr-4": {
             "GERP\\Framework\\": "src"
-        }
+        },
+        "files": [
+           "src/helpers.php"
+        ]
     },
     "scripts": {
         "server": "php -S localhost:8000 -t public"
