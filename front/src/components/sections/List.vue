@@ -10,10 +10,10 @@
                     asasasasasasass
                 </v-card-text>
                 <v-card-text>
-                    //tarefas
+                    <tasks/>
                 </v-card-text>
                 <v-card-text>
-                    //Cria
+                    <create-task/>
                 </v-card-text>
             </v-card>
         </v-flex>
@@ -26,9 +26,13 @@
 
 <script>
     import create from './Create';
+    import tasks from '../tasks/List'
+    import tasksCreate from '../tasks/Create'
     export default {
         components: {
-            create
+            create,
+            tasks,
+            'create-task': tasksCreate
         }
     }
 </script>
