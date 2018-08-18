@@ -28,7 +28,7 @@
             </v-list>
             </v-navigation-drawer>
 
-        <v-toolbar app clipped-left color="red darken-4">
+        <v-toolbar app clipped-left color="lime darken-1">
             <v-toolbar-side-icon @click.prevent="drawer = !drawer" class="white--text"></v-toolbar-side-icon>
             <v-toolbar-title class="white--text">Gerenciador de Projetos</v-toolbar-title>
             <v-spacer></v-spacer>

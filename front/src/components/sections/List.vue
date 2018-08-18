@@ -40,7 +40,7 @@
             'create-task': tasksCreate
         },
         mounted(){
-            this.$store.dispatch('sections/getAll');
+            this.$store.dispatch('sections/getAll', this.$route.params.id);
         }
     }
 </script>
