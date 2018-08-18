@@ -1,15 +1,15 @@
 <template>
     <v-layout row wrap>
-        <v-flex xs3 v-for="project in projects" :key="n">
+        <v-flex xs3 v-for="project in projects" :key="project.id">
             <v-card color="blue-grey darken-2" class="white--text">
                 <v-card-title primary-title>
-                    <div class="headline">App Mobile Ljr</div>
+                    <div class="headline">{{ project.title }}</div>
                 </v-card-title>
                 <v-card-text>
-                    Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos.
+                    {{ project.description }}
                 </v-card-text>
                 <v-card-actions>
-                    <v-btn flat dark :to="'/projects/' + n">
+                    <v-btn flat dark :to="'/projects/' + project.id">
                         Ver +
                     </v-btn>
                 </v-card-actions>
@@ -33,7 +33,7 @@
         name: "List",
         components: {
             'projects-create': ProjectCreate
-        },
+        }
     }
 </script>
 

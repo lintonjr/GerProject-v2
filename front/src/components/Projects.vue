@@ -20,7 +20,7 @@
           }
         },
         mounted(){
-            console.log('estamos prontos!');
+            this.$store.dispatch('projects/getAll');
         }
     }
 </script>

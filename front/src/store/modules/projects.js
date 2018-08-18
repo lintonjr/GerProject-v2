@@ -1,8 +1,5 @@
-const state = {
-    all: []
-}
+import crud from '../crud';
 
-export default {
-    state,
-    namespaced: true
-}
+const projects = crud('/api/projects');
+
+export default projects;
